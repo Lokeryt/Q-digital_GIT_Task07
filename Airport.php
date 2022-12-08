@@ -2,42 +2,44 @@
 
 class Airport
 {
-    private $plane;
+    public array $plane;
 
     public function __construct($plane)
     {
-        $this->plane = $plane;
+        $this->takePlane($plane);
     }
 
-    public function takePlane()
+    public function takePlane($plane)
     {
-        $this->plane->planeLanding();
+        $this->plane[$plane->name] = $plane;
+        $this->plane[$plane->name]->planeLanding($this);
     }
 
-    public function freeUpPlace()
+    public function freeUpPlace($name)
     {
-        $this->plane->takeOff();
+        $this->plane[$name]->takeOff();
+        unset($this->plane[$name]);
     }
 
-    public function planeToTheParking()
+    public function planeToTheParking($name)
     {
-        $this->plane->status = 'Ушёл на стоянку';
+        $this->plane[$name]->changeStatus('Ушёл на стоянку');
     }
 
-    public function planeReadyToTakeOff()
+    public function planeReadyToTakeOff($name)
     {
-        $this->plane->status = 'Готов взлетать';
+        $this->plane[$name]->changeStatus('Готов взлетать');
     }
 
-    public function changePlaneName($name)
+    public function changePlaneName($name, string $newName)
     {
-        $this->plane->name = $name;
+        $this->plane[$name]->name = $newName;
     }
 
-    public function tryToAttack()
+    public function tryToAttack($name)
     {
-        if (method_exists($this->plane, 'attack')) {
-            $this->plane->attack();
+        if (method_exists($this->plane[$name], 'attack')) {
+            $this->plane[$name]->attack();
         } else {
             echo 'Атака не возможна';
         }
