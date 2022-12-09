@@ -2,7 +2,7 @@
 
 class Airport
 {
-    public array $plane;
+    private array $plane;
 
     public function __construct($plane)
     {
@@ -11,8 +11,8 @@ class Airport
 
     public function takePlane($plane)
     {
-        $this->plane[$plane->name] = $plane;
-        $this->plane[$plane->name]->planeLanding($this);
+        $this->plane[$plane->getName()] = $plane;
+        $this->plane[$plane->getName()]->planeLanding($this);
     }
 
     public function freeUpPlace($name)
@@ -33,7 +33,7 @@ class Airport
 
     public function changePlaneName($name, string $newName)
     {
-        $this->plane[$name]->name = $newName;
+        $this->plane[$name]->changeName($newName);
     }
 
     public function tryToAttack($name)

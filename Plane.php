@@ -2,11 +2,11 @@
 
 abstract class Plane
 {
-    public string $name;
-    public float $maxSpeed;
-    public string $status = 'В полёте';
+    private string $name;
+    private float $maxSpeed;
+    private string $status = 'В полёте';
 
-    public Airport $airport;
+    private Airport $airport;
 
     public function __construct($name, $maxSpeed, Airport $airport = null)
     {
@@ -36,8 +36,23 @@ abstract class Plane
         $this->status = $status;
     }
 
+    public function changeName(string $name)
+    {
+        $this->name = $name;
+    }
+
     public function getStatus()
     {
-        echo $this->status;
+        return $this->status;
+    }
+
+    public function getMaxSpeed()
+    {
+        return $this->maxSpeed;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }
